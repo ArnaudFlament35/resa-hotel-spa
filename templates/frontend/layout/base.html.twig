@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Réservation Hôtel & Spa{% endblock %}</title>
+
+    {# Webpack Encore - styles CSS #}
+    {{ encore_entry_link_tags('frontend') }}
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body class="frontend-layout">
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ path('frontend_home') }}" class="navbar-brand">
+                Hôtel & Spa
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="{{ path('frontend_home') }}">Accueil</a></li>
+                <li><a href="{{ path('frontend_booking_index') }}">Réserver</a></li>
+                {% if app.user %}
+                    <li><a href="#">Mon espace</a></li>
+                    <li>
+                        <form action="{{ path('frontend_logout') }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token('logout') }}">
+                            <button type="submit">Déconnexion</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{{ path('frontend_login') }}">Connexion</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {# Messages flash #}
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }}">{{ message }}</div>
+            {% endfor %}
+        {% endfor %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; {{ 'now'|date('Y') }} Hôtel & Spa - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    {# Webpack Encore - scripts JS (avec React) #}
+    {{ encore_entry_script_tags('frontend') }}
+
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

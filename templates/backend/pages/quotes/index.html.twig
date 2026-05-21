@@ -1,0 +1,52 @@
+{% extends 'backend/layout/base.html.twig' %}
+
+{% block title %}Devis{% endblock %}
+{% block page_header %}Gestion des devis{% endblock %}
+
+{% block content %}
+<div class="toolbar">
+    <a href="{{ path('backend_quote_new') }}" class="btn btn-primary">
+        + Nouveau devis
+    </a>
+</div>
+
+{% if quotes is empty %}
+    <div class="empty-state">
+        <p>Aucun devis pour le moment.</p>
+    </div>
+{% else %}
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Client</th>
+                <th>Établissement</th>
+                <th>Dates</th>
+                <th>Montant</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quote in quotes %}
+            <tr>
+                <td>{{ quote.id }}</td>
+                <td>{{ quote.clientName }}</td>
+                <td>{{ quote.hotelName }}</td>
+                <td>{{ quote.checkIn|date('d/m/Y') }} → {{ quote.checkOut|date('d/m/Y') }}</td>
+                <td>{{ quote.totalAmount|number_format(2, ',', ' ') }} €</td>
+                <td><span class="badge badge-{{ quote.statusClass }}">{{ quote.statusLabel }}</span></td>
+                <td>
+                    <a href="{{ path('backend_quote_show', {'id': quote.id}) }}" class="btn btn-sm btn-outline">
+                        Voir
+                    </a>
+                    <a href="{{ path('backend_quote_pdf', {'id': quote.id}) }}" class="btn btn-sm btn-outline">
+                        PDF
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}

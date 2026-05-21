@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin{% endblock %} - Resa Hotel</title>
+
+    {{ encore_entry_link_tags('backend') }}
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body class="backend-layout">
+
+    {% if app.user %}
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="{{ path('backend_dashboard') }}">Resa Hotel — Admin</a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="{{ path('backend_dashboard') }}">Tableau de bord</a></li>
+                    <li class="nav-section">Réservations</li>
+                    <li><a href="{{ path('backend_quote_index') }}">Devis</a></li>
+                    <li><a href="#">Contrats</a></li>
+                    <li class="nav-section">Établissements</li>
+                    <li><a href="#">Hôtels</a></li>
+                    <li><a href="#">Chambres</a></li>
+                    <li><a href="#">Stocks</a></li>
+                    <li class="nav-section">Spa & Thalasso</li>
+                    <li><a href="#">Soins</a></li>
+                    <li><a href="#">Planning</a></li>
+                    <li class="nav-section">Système</li>
+                    <li><a href="#">Utilisateurs</a></li>
+                    <li>
+                        <form action="{{ path('backend_logout') }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token('logout') }}">
+                            <button type="submit" class="btn-link">Déconnexion</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="admin-content">
+            <header class="admin-header">
+                <h1>{% block page_header %}{% endblock %}</h1>
+                <div class="admin-user">
+                    {{ app.user.userIdentifier }}
+                </div>
+            </header>
+
+            <main class="admin-main">
+                {% for type, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }}">{{ message }}</div>
+                    {% endfor %}
+                {% endfor %}
+
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+    {% else %}
+        <main>{% block content_public %}{% endblock %}</main>
+    {% endif %}
+
+    {{ encore_entry_script_tags('backend') }}
+
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

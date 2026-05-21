@@ -1,0 +1,33 @@
+{% extends 'frontend/layout/base.html.twig' %}
+
+{% block title %}Résultats de recherche{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Disponibilités trouvées</h1>
+
+    {% if results is empty %}
+        <div class="alert alert-info">
+            Aucun résultat pour ces critères. Essayez d'autres dates.
+        </div>
+    {% else %}
+        <div class="results-grid">
+            {% for item in results %}
+                <div class="result-card">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.description }}</p>
+                    <strong>{{ item.price }} € / nuit</strong>
+                    <a href="{{ path('frontend_booking_stay', {'slug': item.slug}) }}"
+                       class="btn btn-outline-primary">
+                        Voir le détail
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <a href="{{ path('frontend_booking_index') }}" class="btn btn-secondary mt-3">
+        Modifier la recherche
+    </a>
+</div>
+{% endblock %}

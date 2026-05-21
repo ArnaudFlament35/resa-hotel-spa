@@ -1,0 +1,27 @@
+{% extends 'backend/layout/base.html.twig' %}
+
+{% block title %}Devis #{{ id }}{% endblock %}
+{% block page_header %}Devis #{{ id }}{% endblock %}
+
+{% block content %}
+<div class="quote-detail">
+    <p>Chargement du devis #{{ id }}...</p>
+    {# TODO: afficher les informations complètes du devis #}
+</div>
+
+<div class="action-bar">
+    <form action="{{ path('backend_quote_to_contract', {'id': id}) }}" method="post"
+          onsubmit="return confirm('Convertir ce devis en contrat ?')">
+        <input type="hidden" name="_token" value="{{ csrf_token('quote_to_contract_' ~ id) }}">
+        <button type="submit" class="btn btn-success">Convertir en contrat</button>
+    </form>
+
+    <a href="{{ path('backend_quote_pdf', {'id': id}) }}" class="btn btn-outline">
+        Télécharger PDF
+    </a>
+
+    <a href="{{ path('backend_quote_index') }}" class="btn btn-secondary">
+        Retour à la liste
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'backend/layout/base.html.twig' %}
+
+{% block title %}Nouveau devis{% endblock %}
+{% block page_header %}Créer un devis{% endblock %}
+
+{% block content %}
+<form action="{{ path('backend_quote_new') }}" method="post" class="admin-form">
+    <div class="form-group">
+        <label for="client_name">Nom du client</label>
+        <input type="text" id="client_name" name="client_name" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label for="client_email">Email du client</label>
+        <input type="email" id="client_email" name="client_email" class="form-control" required>
+    </div>
+
+    {# TODO: ajouter la sélection hôtel, dates, chambres, soins #}
+
+    <input type="hidden" name="_token" value="{{ csrf_token('quote_new') }}">
+    <button type="submit" class="btn btn-primary">Créer le devis</button>
+    <a href="{{ path('backend_quote_index') }}" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

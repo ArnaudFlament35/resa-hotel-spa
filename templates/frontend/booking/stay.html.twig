@@ -1,0 +1,19 @@
+{% extends 'frontend/layout/base.html.twig' %}
+
+{% block title %}Détail du séjour{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Détail du séjour</h1>
+    <p>Référence : <code>{{ slug }}</code></p>
+
+    {# TODO: afficher les détails de l'hébergement, des soins inclus, prix #}
+    <div class="stay-detail">
+        <p>Informations sur le séjour à venir...</p>
+    </div>
+
+    <a href="{{ path('frontend_booking_cart') }}" class="btn btn-primary">
+        Ajouter au panier
+    </a>
+</div>
+{% endblock %}

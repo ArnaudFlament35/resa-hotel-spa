@@ -1,0 +1,30 @@
+{% extends 'backend/layout/base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+{% block page_header %}Tableau de bord{% endblock %}
+
+{% block content %}
+<div class="dashboard-grid">
+    <div class="stat-card">
+        <h3>Devis en attente</h3>
+        <span class="stat-number">0</span>
+    </div>
+    <div class="stat-card">
+        <h3>Contrats actifs</h3>
+        <span class="stat-number">0</span>
+    </div>
+    <div class="stat-card">
+        <h3>Réservations ce mois</h3>
+        <span class="stat-number">0</span>
+    </div>
+    <div class="stat-card">
+        <h3>Taux d'occupation</h3>
+        <span class="stat-number">0%</span>
+    </div>
+</div>
+
+<section class="recent-activity">
+    <h2>Activité récente</h2>
+    <p>Aucune activité récente.</p>
+</section>
+{% endblock %}

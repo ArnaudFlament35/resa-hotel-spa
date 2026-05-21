@@ -1,0 +1,35 @@
+{% extends 'frontend/layout/base.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <h1>Bienvenue dans votre espace de réservation</h1>
+        <p class="lead">Hôtels, résidences, soins spa et thalasso — trouvez votre séjour idéal.</p>
+        <a href="{{ path('frontend_booking_index') }}" class="btn btn-primary btn-lg">
+            Rechercher une disponibilité
+        </a>
+    </div>
+</div>
+
+<section class="features container">
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>Hôtels & Résidences</h3>
+            <p>Plusieurs établissements avec des classements et services différents.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Soins Spa</h3>
+            <p>Massages, soins du visage, accès bien-être — à la carte ou en séjour.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Thalassothérapie</h3>
+            <p>Cures et soins marins pour une remise en forme complète.</p>
+        </div>
+    </div>
+</section>
+
+{# Point d'ancrage React - le composant SearchWidget sera monté ici #}
+<div id="search-widget" data-component="SearchWidget"></div>
+{% endblock %}

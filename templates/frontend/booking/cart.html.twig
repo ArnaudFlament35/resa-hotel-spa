@@ -1,0 +1,14 @@
+{% extends 'frontend/layout/base.html.twig' %}
+
+{% block title %}Votre panier{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Votre panier</h1>
+
+    {# Le tunnel de commande React est monté ici #}
+    <div id="booking-cart" data-component="BookingCart"
+         data-confirm-url="{{ path('frontend_booking_confirm') }}">
+    </div>
+</div>
+{% endblock %}
