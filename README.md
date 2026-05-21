@@ -15,13 +15,32 @@ Application Symfony 7.4 avec Docker, React (Webpack Encore), et API REST.
   /api/soins        → Soins spa/thalasso
 ```
 
+## Dépôt GitHub
+
+`git@github.com-perso:ArnaudFlament35/resa-hotel-spa.git`
+
+> L'alias `github.com-perso` est défini dans `~/.ssh/config` pour pointer vers le compte GitHub personnel d'Arnaud. Il doit être configuré sur chaque machine de travail (voir section SSH ci-dessous).
+
 ## Démarrage rapide
 
 ### 1. Prérequis
 - Docker Desktop
 - Node.js 20+ (pour les assets en local)
+- Clé SSH configurée pour GitHub (voir section SSH ci-dessous)
 
-### 2. Lancer l'environnement Docker
+### 2. Cloner le projet (première fois sur une nouvelle machine)
+
+```bash
+git clone git@github.com-perso:ArnaudFlament35/resa-hotel-spa.git
+cd resa-hotel-spa
+composer install
+npm install
+make up
+make migrate
+npm run dev
+```
+
+### 3. Lancer l'environnement Docker
 
 ```bash
 make up
@@ -34,13 +53,13 @@ Accès :
 | phpMyAdmin    | http://localhost:8081        |
 | MailHog       | http://localhost:8025        |
 
-### 3. Créer la base de données
+### 4. Créer la base de données
 
 ```bash
 make migrate
 ```
 
-### 4. Compiler les assets (React + CSS)
+### 5. Compiler les assets (React + CSS)
 
 ```bash
 # En local (sans Docker)
@@ -115,6 +134,33 @@ config/
    <div data-component="MonComposant" data-ma-prop="valeur"></div>
    ```
 4. Recompiler : `npm run watch`
+
+## Configuration SSH pour GitHub (nouvelle machine)
+
+Pour utiliser l'alias `github.com-perso`, le fichier `~/.ssh/config` doit contenir :
+
+```
+Host github.com-perso
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/TA_CLE_SSH_PERSO
+```
+
+Remplace `TA_CLE_SSH_PERSO` par le nom de ta clé privée (ex: `id_ed25519_perso`).
+
+Si tu n'as pas encore de clé SSH pour ce compte :
+
+```bash
+# Générer une nouvelle clé
+ssh-keygen -t ed25519 -C "ton@email.com" -f ~/.ssh/id_ed25519_perso
+
+# Afficher la clé publique à copier sur GitHub (Settings → SSH Keys)
+cat ~/.ssh/id_ed25519_perso.pub
+
+# Tester la connexion
+ssh -T git@github.com-perso
+# Réponse attendue : Hi ArnaudFlament35! You've successfully authenticated...
+```
 
 ## Entités à créer (prochaines étapes)
 
